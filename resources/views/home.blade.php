@@ -9,8 +9,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ $event->title }}</h5>
-                        <p class="card-text">Datum: {{ $event->date->format('Y-m-d') }}</p>
-                        <p class="card-text">Tijd: {{ $event->time->format('H:i') }}</p>
+                        <p class="card-text">Datum: {{ $event->date}}</p>
+                        <p class="card-text">Tijd: {{ \Carbon\Carbon::parse($event->time)->format('H:i') }}</p>
                         <p class="card-text">Locatie: {{ $event->location }}</p>
                         <p class="card-text">Beschrijving: {{ $event->description }}</p>
                         <a href="{{ route('event.show', $event) }}" class="btn btn-primary">Bestel Tickets</a>

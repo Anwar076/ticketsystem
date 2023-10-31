@@ -21,6 +21,8 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/', [EventController::class, 'index']);
+Route::get('/event/{event}', 'EventController@show')->name('event.show');
+
 
 Auth::routes();
 
