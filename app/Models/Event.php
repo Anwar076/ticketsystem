@@ -13,4 +13,8 @@ class Event extends  Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    protected $casts = [
+        'date' => 'datetime:d:m:Y'
+    ];
 }

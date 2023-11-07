@@ -19,21 +19,25 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
+        $faker = app(\Faker\Generator::class);
+        $faker->addProvider(new \Smknstd\FakerPicsumImages\FakerPicsumImagesProvider($faker));
         $today = Carbon::now(); // Huidige datum en tijd
         $sevenDaysAgo = $today->copy()->subDays(7);
-        $date = fake()->dateTimeBetween($today, '+7 days' ); // Genereer een datum tussen vandaag en 7 dagen in de toekomst
+        $date = fake()->dateTimeBetween('-10 days', '+30 days', null);
         $hour = fake()->randomElement([14, 15, 16]); // Kies een willekeurig uur
         $minutes = fake()->numberBetween(0, 59); // Genereer willekeurige minuten
 
         $time = sprintf('%02d:%02d', $hour, $minutes); // Formatteer de tijd als HH:MM
 
         return [
+            'imageurl' =>$faker->imageUrl(),
             'title' => fake()->sentence(),
             'date' => $date,
             'time' => $time,
             'location' => fake()->address(),
             'created_at' => now(),
             'updated_at' => now(),
+            'description' =>fake()->text()
         ];
     }
 

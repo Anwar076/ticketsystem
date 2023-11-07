@@ -6,3 +6,52 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+body {
+    background-color: #297373;
+}
+.ticket-card {
+    border: 1px solid #E6E6E6;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img-top img {
+    width: 100%;
+    height: auto;
+}
+
+.card-title {
+    font-size: 24px;
+}
+
+.card-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: #FF8552;
+    border-color: #FF8552;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #e64949;
+}
