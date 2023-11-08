@@ -14,8 +14,9 @@ class EventController extends Controller
      */
     public function index()
     {
+
         $today = Carbon::now(); // Gebruik Carbon om de huidige datum en tijd te krijgen
-        $upcomingEvents = Event::where('date', '>=', $today->toDateString())->get();
+        $upcomingEvents = Event::whereDate('date', '>', Carbon::now())->orderBy('date')->get();
 
         return view('home', compact('upcomingEvents'));
     }

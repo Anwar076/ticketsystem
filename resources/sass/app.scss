@@ -55,3 +55,24 @@ body {
 .btn-primary:hover {
     background-color: #e64949;
 }
+
+/* Aangepaste stijlen voor de knoppen */
+.btn-primary {
+    background-color: #007bff; /* Verander de achtergrondkleur */
+    border-color: #007bff; /* Verander de randkleur */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Verander de achtergrondkleur bij hover */
+    border-color: #0056b3; /* Verander de randkleur bij hover */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Verander de achtergrondkleur */
+    border-color: #dc3545; /* Verander de randkleur */
+}
+
+.btn-danger:hover {
+    background-color: #b52028; /* Verander de achtergrondkleur bij hover */
+    border-color: #b52028; /* Verander de randkleur bij hover */
+}

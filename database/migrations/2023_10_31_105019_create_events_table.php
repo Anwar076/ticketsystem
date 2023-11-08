@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Faker\Generator as Faker;
 
 return new class extends Migration
 {
@@ -11,14 +12,22 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->text('imageurl');
             $table->string('title');
             $table->date('date');
             $table->time('time', 0);
             $table->string('location');
             $table->text('description')->nullable();
+
+            $faker = app(Faker::class);
+            $faker->addProvider(new \Smknstd\FakerPicsumImages\FakerPicsumImagesProvider($faker));
+
+            $randomImageUrl = $faker->imageUrl();
+
+            $table->string('imageurl')->default($randomImageUrl);
+
             $table->timestamps();
         });
     }
