@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\Storage;
 
 class AdminEventController extends Controller
 {
@@ -20,17 +21,36 @@ class AdminEventController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
+        // Valideer de ingediende gegevens
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
             'date' => 'required|date',
             'time' => 'required',
-            'location' => 'required',
+            'location' => 'required|max:255',
             'description' => 'nullable',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Valideer het uploaden van een afbeelding
         ]);
 
-        Event::create($request->all());
+        // Verwerk de geüploade afbeelding
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension(); // Genereer een unieke bestandsnaam
+            $image->storeAs('public/images', $imageName); // Sla de afbeelding op in de 'public/images' map
+            $imageUrl = asset('storage/images/' . $imageName); // Genereer de URL voor de opgeslagen afbeelding
+        }
 
-        return redirect()->route('admin.events.index');
+        // Maak een nieuw evenement aan en sla het op in de database
+        $event = new Event([
+            'title' => $validatedData['title'],
+            'date' => $validatedData['date'],
+            'time' => $validatedData['time'],
+            'location' => $validatedData['location'],
+            'description' => $validatedData['description'] ?? '',
+            'imageurl' => $imageUrl ?? '', // Sla de URL van de opgeslagen afbeelding op
+        ]);
+        $event->save();
+
+        return redirect('/')->with('success', 'Evenement succesvol aangemaakt.');
     }
 
     public function edit(Event $event)
@@ -46,6 +66,7 @@ class AdminEventController extends Controller
             'time' => 'required',
             'location' => 'required',
             'description' => 'nullable',
+            'imageurl' => 'required', // Vereiste validatie voor 'imageurl'
         ]);
 
         $event->update($request->all());

@@ -8,7 +8,8 @@
         <thead>
             <tr>
                 <th>Titel</th>
-                <th>Datum</th>
+                <th style="width: 120px;">Datum</th>
+                <th>Tijd</th>
                 <th>Locatie</th>
                 <th>Acties</th>
             </tr>
@@ -17,16 +18,21 @@
             @foreach ($events as $event)
             <tr>
                 <td>{{ $event->title }}</td>
-                <td>{{ $event->date }}</td>
+                <td class="text-nowrap">{{ $event->date->format('d-m-Y') }}</td>
+                <td>{{ $event->time }}</td>
                 <td>{{ $event->location }}</td>
                 <td>
-                    <a href="{{ route('admin.events.edit', $event) }}" class="btn btn-primary custom-button">Bewerken</a>
-                    <form action="{{ route('admin.events.destroy', $event) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger custom-button" onclick="return confirm('Weet je zeker dat je dit evenement wilt verwijderen?')">Verwijderen</button>
-                    </form>
+                    <div style="display: flex; gap: 5px;">
+                        <a href="{{ route('admin.events.edit', $event) }}" class="btn btn-edit btn-sm">Bewerken</a>
+                        <form action="{{ route('admin.events.destroy', $event) }}" method="POST" style="margin: 0;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-delete btn-sm" style="color: #fff; border: none; border-radius: 25px; padding: 12px 24px; font-weight: 600; transition: background-color 0.2s;" onclick="return confirm('Weet je zeker dat je dit evenement wilt verwijderen?')">Verwijderen</button>
+                        </form>
+                    </div>
                 </td>
+
+
             </tr>
             @endforeach
         </tbody>

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Ticketsysteem') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-md navbar-light" style="background-color: #85FFC7;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Ticketsysteem') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -42,7 +42,7 @@
                         <a class="nav-link" href="{{ route('admin.dashboard') }}"> Admin</a>
                         <a class="nav-link" href="{{ route('admin.events.index') }}">Evenementen beheren</a>
                         <a class="nav-link" href="{{ route('admin.users.index') }}">Gebruikers beheren</a>
-                        <a class="nav-link" href="{{ route('admin.reservations.index') }}">Reserveringen beheren</a>
+                        <!-- <a class="nav-link" href="{{ route('admin.reservations.index') }}">Reserveringen beheren</a> -->
                         @endif
                         @guest
                         @if (Route::has('login'))

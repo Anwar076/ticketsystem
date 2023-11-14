@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Evenement Bewerken</h1>
-    <form action="{{ route('admin.events.update', $event) }}" method="POST">
+    <form action="{{ route('admin.events.update', $event) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -26,8 +26,11 @@
             <label for="description">Beschrijving</label>
             <textarea class="form-control" id="description" name="description">{{ $event->description }}</textarea>
         </div>
+        <div class="form-group">
+            <label for="imageurl">Afbeelding URL:</label>
+            <input type="text" name="imageurl" id="imageurl" class="form-control" value="{{ $event->imageurl }}" required>
+        </div>
         <button type="submit" class="btn btn-primary">Opslaan</button>
     </form>
 </div>
 @endsection
-    

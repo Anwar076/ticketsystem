@@ -14,7 +14,8 @@ class Event extends  Model
         'time',
         'location',
         'description',
-        
+        'imageurl',
+
 
     ];
 

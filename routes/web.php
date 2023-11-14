@@ -20,11 +20,9 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::view('dashboard', 'admin.dashboard')->name('admin.dashboard');
     // Route::get('/admin/events', [AdminEventController::class, 'index'])->name('admin.events.index');
     Route::get('/admin/events/create', [AdminEventController::class, 'create'])->name('admin.events.create');
@@ -32,20 +30,22 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/admin/events/{event}/edit', [AdminEventController::class, 'edit'])->name('admin.events.edit');
     Route::put('/admin/events/{event}', [AdminEventController::class, 'update'])->name('admin.events.update');
     Route::delete('/admin/events/{event}', [AdminEventController::class, 'destroy'])->name('admin.events.destroy');
+    Route::get('/event/{event}', [EventController::class, 'show'])->name('event.show');
+    Route::get('/admin/events', [AdminEventController::class, 'index'])->name('admin.events.index');
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/reservations', 'ReservationController@index')->name('admin.reservations.index');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
     // Route::resource('events');
 });
 
-Route::get('/', [EventController::class, 'index']);
-Route::get('/event/{event}',[EventController::class, 'show'])->name('event.show');
-Route::get('/admin/events', [AdminEventController::class, 'index'])->name('admin.events.index');
-Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
-Route::get('/admin/reservations', 'ReservationController@index')->name('admin.reservations.index');
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+Route::get('/', [EventController::class, 'index'])->name('home');
+
+
+
 
 
 
 
 
 Auth::routes();
-

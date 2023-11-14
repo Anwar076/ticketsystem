@@ -20,13 +20,14 @@ return new class extends Migration
             $table->time('time', 0);
             $table->string('location');
             $table->text('description')->nullable();
+            $table->string('imageurl');
 
-            $faker = app(Faker::class);
-            $faker->addProvider(new \Smknstd\FakerPicsumImages\FakerPicsumImagesProvider($faker));
+            // $faker = app(Faker::class);
+            // $faker->addProvider(new \Smknstd\FakerPicsumImages\FakerPicsumImagesProvider($faker));
 
-            $randomImageUrl = $faker->imageUrl();
+            // $randomImageUrl = $faker->imageUrl();
 
-            $table->string('imageurl')->default($randomImageUrl);
+            // $table->string('imageurl')->default($randomImageUrl);
 
             $table->timestamps();
         });

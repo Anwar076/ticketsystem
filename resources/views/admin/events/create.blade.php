@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Nieuw Evenement Toevoegen</h1>
-    <form action="{{ route('admin.events.store') }}" method="POST">
+    <form action="{{ route('admin.events.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="title">Titel</label>
@@ -25,6 +25,13 @@
             <label for="description">Beschrijving</label>
             <textarea class="form-control" id="description" name="description"></textarea>
         </div>
+
+        <div class="form-group">
+            <label for="image">Afbeelding uploaden</label>
+            <input type="file" class="form-control-file" id="image" name="image" required>
+        </div>
+
+
         <button type="submit" class="btn btn-primary">Opslaan</button>
     </form>
 </div>

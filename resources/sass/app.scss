@@ -76,3 +76,12 @@ body {
     background-color: #b52028; /* Verander de achtergrondkleur bij hover */
     border-color: #b52028; /* Verander de randkleur bij hover */
 }
+.btn-edit {
+    @extend .btn;
+    @extend .btn-primary;
+}
+
+.btn-delete {
+    @extend .btn;
+    @extend .btn-danger;
+}
