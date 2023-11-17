@@ -20,7 +20,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #85FFC7;">
+        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #32A287;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Ticketsysteem') }}
