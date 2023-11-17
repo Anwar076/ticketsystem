@@ -29,6 +29,7 @@ class AdminEventController extends Controller
             'location' => 'required|max:255',
             'description' => 'nullable',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Valideer het uploaden van een afbeelding
+            'price' => 'nullable|numeric', // Valideer het prijsveld (optioneel)
         ]);
 
         // Verwerk de geüploade afbeelding
@@ -47,11 +48,13 @@ class AdminEventController extends Controller
             'location' => $validatedData['location'],
             'description' => $validatedData['description'] ?? '',
             'imageurl' => $imageUrl ?? '', // Sla de URL van de opgeslagen afbeelding op
+            'price' => $validatedData['price'] ?? null, // Sla de prijs op als die is ingediend, anders null
         ]);
         $event->save();
 
         return redirect('/')->with('success', 'Evenement succesvol aangemaakt.');
     }
+
 
     public function edit(Event $event)
     {
@@ -60,19 +63,34 @@ class AdminEventController extends Controller
 
     public function update(Request $request, Event $event)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'title' => 'required',
             'date' => 'required|date',
             'time' => 'required',
             'location' => 'required',
             'description' => 'nullable',
-            'imageurl' => 'required', // Vereiste validatie voor 'imageurl'
+            'price' => 'nullable|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validatie voor optionele nieuwe afbeelding
         ]);
 
-        $event->update($request->all());
+        // Update de velden van het evenement met gevalideerde gegevens
+        $event->fill($validatedData);
 
-        return redirect()->route('admin.events.index');
+        // Verwerk de geüploade afbeelding indien aanwezig
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName);
+            $imageUrl = asset('storage/images/' . $imageName);
+            $event->imageurl = $imageUrl;
+        }
+
+        $event->save();
+
+        return redirect()->route('admin.events.index')->with('success', 'Evenement succesvol bijgewerkt.');
     }
+
+
 
     public function destroy(Event $event)
     {
