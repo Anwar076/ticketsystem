@@ -37,7 +37,9 @@ class EventFactory extends Factory
             'location' => fake()->address(),
             'created_at' => now(),
             'updated_at' => now(),
-            'description' =>fake()->text()
+            'description' =>fake()->text(),
+            'price' => $faker->randomFloat(2, 0, 1000), // Genereert een willekeurige prijs tussen 0 en 1000 met 2 decimalen
+
         ];
     }
 
