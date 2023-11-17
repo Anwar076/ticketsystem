@@ -20,6 +20,7 @@ return new class extends Migration
             $table->time('time', 0);
             $table->string('location');
             $table->text('description')->nullable();
+            $table->decimal('price', 8, 2);
             $table->string('imageurl');
 
             // $faker = app(Faker::class);
