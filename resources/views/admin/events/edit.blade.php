@@ -12,7 +12,11 @@
         </div>
         <div class="form-group">
             <label for="date">Datum</label>
-            <input type="date" class="form-control" id="date" name="date" value="{{ $event->date }}" required>
+            @php
+            // Converteer de datum naar het juiste formaat 'YYYY-MM-DD' voor het inputveld
+            $formattedDate = \Carbon\Carbon::parse($event->date)->format('Y-m-d');
+            @endphp
+            <input type="date" class="form-control" id="date" name="date" value="{{ $formattedDate }}" required>
         </div>
         <div class="form-group">
             <label for="time">Tijd</label>
@@ -27,8 +31,12 @@
             <textarea class="form-control" id="description" name="description">{{ $event->description }}</textarea>
         </div>
         <div class="form-group">
-            <label for="imageurl">Afbeelding URL:</label>
-            <input type="text" name="imageurl" id="imageurl" class="form-control" value="{{ $event->imageurl }}" required>
+            <label for="price">Prijs</label>
+            <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" value="{{ $event->price }}">
+        </div>
+        <div class="form-group">
+            <label for="image">Afbeelding uploaden</label>
+            <input type="file" class="form-control-file" id="image" name="image" required>
         </div>
         <button type="submit" class="btn btn-primary">Opslaan</button>
     </form>

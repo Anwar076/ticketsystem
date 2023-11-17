@@ -9,10 +9,12 @@
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
             <div class="card ticket-card" style="height: 100%;">
                 <div class="card-img-top">
-                    <img src="{{ $event->imageurl }}" alt="{{ $event->title }}" class="img-fluid">
+                <img src="{{ $event->imageurl }}" alt="{{ $event->title }}" class="img-fluid rounded" style="width: 414px; height: 310px; object-fit: cover;">
+
                 </div>
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ $event->title }}</h5>
+                    <p class="card-text"><strong>Prijs:</strong>€{{ number_format($event->price, 2) }}</p>
                     <p class="card-text"><strong>Datum:</strong> {{ $event->date->format('d-m-Y') }}</p>
                     <p class="card-text"><strong>Tijd:</strong> {{ \Carbon\Carbon::parse($event->time)->format('H:i') }}</p>
                     <p class="card-text"><strong>Locatie:</strong> {{ $event->location }}</p>
