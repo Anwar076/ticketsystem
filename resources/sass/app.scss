@@ -8,14 +8,17 @@
 @import 'bootstrap/scss/bootstrap';
 
 body {
-    background-color: #297373;
+    background-color: #A1FCDF;
 }
 .ticket-card {
-    border: 1px solid #E6E6E6;
+    border: 1px solid #44CF6C;
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.2s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.card-body{
+    background-color: #A9FDAC;
 }
 
 .ticket-card:hover {
