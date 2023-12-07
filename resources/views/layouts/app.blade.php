@@ -42,6 +42,7 @@
                         <a class="nav-link" href="{{ route('admin.dashboard') }}"> Admin</a>
                         <a class="nav-link" href="{{ route('admin.events.index') }}">Evenementen beheren</a>
                         <a class="nav-link" href="{{ route('admin.users.index') }}">Gebruikers beheren</a>
+                        <a class="nav-link" href="{{ route('admin.tickets.index') }}">reservatie beheren</a>
                         <!-- <a class="nav-link" href="{{ route('admin.reservations.index') }}">Reserveringen beheren</a> -->
                         @endif
                         @guest
@@ -63,15 +64,18 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
+
+                                <!-- Link naar reserveringen -->
+                                <a class="dropdown-item" href="{{ route('user.reservations') }}">Mijn Reserveringen</a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </div>
+
                         </li>
                         @endguest
                     </ul>

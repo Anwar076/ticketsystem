@@ -36,7 +36,7 @@
         </div>
         <div class="form-group">
             <label for="image">Afbeelding uploaden</label>
-            <input type="file" class="form-control-file" id="image" name="image" required>
+            <input type="file" class="form-control-file" id="image" name="image">
         </div>
         <button type="submit" class="btn btn-primary">Opslaan</button>
     </form>

@@ -7,6 +7,10 @@ use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TicketOrderController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\TicketController;
+
 
 
 /*
@@ -20,6 +24,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::get('/', [EventController::class, 'index'])->name('home');
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -36,10 +41,29 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/reservations', 'ReservationController@index')->name('admin.reservations.index');
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+    Route::get('/admin/tickets', [TicketController::class, 'index'])->name('admin.tickets.index');
+    Route::put('/admin/tickets/{ticket}', [TicketController::class, 'update'])->name('admin.tickets.update');
+
+
     // Route::resource('events');
 });
+Route::middleware(['auth'])->group(function () {
+    // Andere routes
+    Route::get('/user/reservations', [ReservationController::class, 'userReservations'])->name('user.reservations');
+    Route::get('/reservations', [ReservationController::class, 'allReservations'])->name('all.reservations');
+    Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
+    Route::get('/reservations/{id}', [ReservationController::class, 'showReservation'])->name('reservations.show');
 
-Route::get('/', [EventController::class, 'index'])->name('home');
+    // Meer routes toevoegen indien nodig
+});
+
+Route::middleware('auth.ticket')->group(function () {
+    // Jouw ticket bestelroutes hier
+    Route::get('/events/{event}/order', [TicketOrderController::class, 'showOrderForm'])->name('event.order');
+    Route::post('/events/{event}/order', [TicketOrderController::class, 'reserveTickets'])->name('event.reserve');
+
+});
+Route::get('/send-mail', [SendMailController::class, 'methodName'])->name('send.mail');
 
 
 

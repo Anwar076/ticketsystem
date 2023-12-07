@@ -21,5 +21,5 @@ class reservation extends Model
     {
         return $this->hasMany(Ticket::class);
     }
-}
+}   
 

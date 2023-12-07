@@ -12,7 +12,9 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = Ticket::all(); // Haal alle tickets op
+
+        return view('admin.tickets.index', ['tickets' => $tickets]);
     }
 
     /**
@@ -52,7 +54,9 @@ class TicketController extends Controller
      */
     public function update(Request $request, Ticket $ticket)
     {
-        //
+        $ticket->update(['scanned' => true]);
+
+        return redirect()->route('admin.tickets.index')->with('success', 'Ticket gemarkeerd als gescand');
     }
 
     /**

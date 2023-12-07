@@ -7,31 +7,28 @@
     <div class="row">
         @foreach($upcomingEvents as $event)
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-            <div class="card ticket-card" style="height: 100%;">
-                <div class="card-img-top">
-                <img src="{{ $event->imageurl }}" alt="{{ $event->title }}" class="img-fluid rounded" style="width: 414px; height: 310px; object-fit: cover;">
-
+            <div class="card ticket-card position-relative" style="height: 100%;">
+                <div class="position-relative">
+                    <div class="overlay">
+                        <p class="price-overlay">€{{ number_format($event->price, 2) }}</p>
+                    </div>
+                    <img src="{{ $event->imageurl }}" alt="{{ $event->title }}" class="img-fluid rounded" style="width: 414px; height: 310px; object-fit: cover;">
                 </div>
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ $event->title }}</h5>
-                    <p class="card-text"><strong>Prijs:</strong>€{{ number_format($event->price, 2) }}</p>
                     <p class="card-text"><strong>Datum:</strong> {{ $event->date->format('d-m-Y') }}</p>
                     <p class="card-text"><strong>Tijd:</strong> {{ \Carbon\Carbon::parse($event->time)->format('H:i') }}</p>
                     <p class="card-text"><strong>Locatie:</strong> {{ $event->location }}</p>
                     <p class="card-text"><strong>Beschrijving:</strong> {{ $event->description }}</p>
                     <div class="mt-auto">
-                        <a href="{{ route('event.show', $event) }}" class="btn btn-primary">Bestel Tickets</a>
+                    <a href="{{ route('event.order', $event) }}" class="btn btn-primary">Bestel Tickets</a>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
         @endforeach
     </div>
 </div>
+
 
 @endsection

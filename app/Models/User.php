@@ -43,7 +43,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function reservations()
+    public function reservation()
     {
         return $this->hasMany(Reservation::class);
     }
@@ -57,5 +57,8 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->roles()->where('name', 'admin')->exists();
+    }
+    public function reservations() {
+        return $this->hasMany(Reservation::class);
     }
 }

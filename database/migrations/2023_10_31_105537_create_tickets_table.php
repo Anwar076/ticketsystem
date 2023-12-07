@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->decimal('price', 8, 2);
+            $table->string('type')->default('General');
+            $table->decimal('price', 8, 2)->nullable(); // Allow null values for price
             $table->unsignedBigInteger('reservation_id');
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+            $table->boolean('scanned')->default(false);
 
             $table->timestamps();
         });
