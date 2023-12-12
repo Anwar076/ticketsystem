@@ -8,6 +8,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\User;
+use App\Models\Ticket;
+use App\Models\Event;
 
 class ReservationConfirmationMail extends Mailable
 {
@@ -18,11 +21,13 @@ class ReservationConfirmationMail extends Mailable
      */
     public $user;
     public $reservedTickets;
+    public $event;
 
     public function __construct($user, $reservedTickets)
     {
         $this->user = $user;
         $this->reservedTickets = $reservedTickets;
+        $this->event = Event::find($reservedTickets[0]->reservation->event_id);
     }
 
     public function build()
@@ -59,5 +64,6 @@ class ReservationConfirmationMail extends Mailable
     public function attachments(): array
     {
         return [];
+
     }
 }

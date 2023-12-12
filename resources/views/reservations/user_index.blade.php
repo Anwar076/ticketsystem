@@ -2,42 +2,50 @@
 
 @section('content')
     <div class="container">
-        <h1>Mijn Reserveringen</h1>
+        <h1 class="mb-4">User Reservations</h1>
 
-        @if($reservations->isEmpty())
-            <p>Je hebt geen reserveringen.</p>
-        @else
-            @foreach($reservations as $reservation)
-                <h2>{{ $reservation->event_name }}</h2>
-                <p>Datum: {{ $reservation->event_date }}</p>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Historical Reservations</h2>
+                @foreach ($historicalReservations as $reservation)
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ $reservation->event->name }}</h3>
+                            <p class="card-text">Date: {{ $reservation->event->date }}</p>
+                            <p class="card-text">Tickets Scanned: {{ $reservation->tickets_scanned }}</p>
+                            <a href="{{ route('events.details', ['id' => $reservation->event->id]) }}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
-                @if($reservation->tickets->isEmpty())
-                    <p>Geen tickets beschikbaar voor deze reservering.</p>
-                @else
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Ticketnummer</th>
-                                <th>Gescand</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($reservation->tickets as $ticket)
-                                <tr>
-                                    <td>{{ $ticket->id }}</td>
-                                    <td>
-                                        @if($ticket->scanned)
-                                            <span style="color: green;">✔️</span>
-                                        @else
-                                            <span style="color: red;">❌</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @endif
-            @endforeach
-        @endif
+            <div class="col-md-4">
+                <h2>Expired Reservations</h2>
+                @foreach ($expiredReservations as $reservation)
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ $reservation->event->name }}</h3>
+                            <p class="card-text">Date: {{ $reservation->event->date }}</p>
+                            <p class="card-text">Tickets Scanned: {{ $reservation->tickets_scanned }}</p>
+                            <a href="{{ route('events.details', ['id' => $reservation->event->id]) }}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="col-md-4">
+                <h2>Future Reservations</h2>
+                @foreach ($futureReservations as $reservation)
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ $reservation->event->name }}</h3>
+                            <p class="card-text">Date: {{ $reservation->event->date }}</p>
+                            <p class="card-text">Tickets Scanned: {{ $reservation->tickets_scanned }}</p>
+                            <a href="{{ route('events.details', ['id' => $reservation->event->id]) }}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 @endsection

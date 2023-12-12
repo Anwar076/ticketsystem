@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TicketOrderController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\SendMailController;
 
 
 
@@ -53,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reservations', [ReservationController::class, 'allReservations'])->name('all.reservations');
     Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
     Route::get('/reservations/{id}', [ReservationController::class, 'showReservation'])->name('reservations.show');
+    Route::get('/events/{id}', [EventController::class, 'show'])->name('events.details');
+    Route::get('/reservation/{id}/pdf',[ReservationController::class, 'downloadPdf'])->name('reservation.pdf');
 
     // Meer routes toevoegen indien nodig
 });

@@ -21,5 +21,12 @@ class reservation extends Model
     {
         return $this->hasMany(Ticket::class);
     }
-}   
-
+    public function getScannedTicketsCountAttribute()
+    {
+        return $this->tickets->where('scanned', true)->count();
+    }
+    public function getUnscannedTicketsCountAttribute()
+    {
+        return $this->tickets->where('scanned', false)->count();
+    }
+}

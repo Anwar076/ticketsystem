@@ -6,6 +6,7 @@
     <title>Reservering Bevestiging</title>
 </head>
 <body>
+    //how to make a
     <h1>Reservering Bevestiging</h1>
 
     <p>Beste {{ $user->name }},</p>

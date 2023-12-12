@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
+    protected $fillable = [
+        'scanned',
+
+
+    ];
+
     public function reservation()
     {
         return $this->belongsTo(reservation::class);
