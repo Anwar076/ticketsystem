@@ -1,36 +1,38 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Reservation Details</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
         }
         .header {
-            background-color: #f8f9fa;
-            padding: 20px;
             text-align: center;
-        }
-        .content {
-            margin: 20px;
+            margin-bottom: 50px;
         }
         .ticket {
-            background-color: #e9ecef;
-            padding: 10px;
-            margin-bottom: 10px;
-            text-align: center;
-            border-radius: 5px;
+            border: 1px solid #000;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .ticket h2 {
+            color: #333;
+            font-size: 18px;
+            margin-top: 0;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Reservation Details</h1>
+        <h1 style="color: #ff6600;">Reservation Details</h1>
     </div>
-    <div class="content">
-        @foreach ($ticketNumbers as $ticketNumber)
-            <div class="ticket">
-                <h2>Ticket Number: {{ $ticketNumber }}</h2>
-            </div>
-        @endforeach
-    </div>
+    @foreach($ticketNumbers as $ticketNumber)
+        <div class="ticket">
+            <h2>Ticket Number: <span style="color: #ff6600;">{{ $ticketNumber }}</span></h2>
+        </div>
+    @endforeach
+</body>
+</html>

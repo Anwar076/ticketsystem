@@ -13,7 +13,7 @@
                             <h3 class="card-title">{{ $reservation->event->name }}</h3>
                             <p class="card-text">Date: {{ $reservation->event->date }}</p>
                             <p class="card-text">Tickets Scanned: {{ $reservation->tickets_scanned }}</p>
-                            <a href="{{ route('events.details', ['id' => $reservation->event->id]) }}" class="btn btn-primary">View Details</a>
+                            <a href="{{ route('reservations.details', ['id' => $reservation->id]) }}" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
                 @endforeach
@@ -27,7 +27,7 @@
                             <h3 class="card-title">{{ $reservation->event->name }}</h3>
                             <p class="card-text">Date: {{ $reservation->event->date }}</p>
                             <p class="card-text">Tickets Scanned: {{ $reservation->tickets_scanned }}</p>
-                            <a href="{{ route('events.details', ['id' => $reservation->event->id]) }}" class="btn btn-primary">View Details</a>
+                            <a href="{{ route('reservations.details', ['id' => $reservation->id]) }}" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
                 @endforeach
@@ -41,7 +41,7 @@
                             <h3 class="card-title">{{ $reservation->event->name }}</h3>
                             <p class="card-text">Date: {{ $reservation->event->date }}</p>
                             <p class="card-text">Tickets Scanned: {{ $reservation->tickets_scanned }}</p>
-                            <a href="{{ route('events.details', ['id' => $reservation->event->id]) }}" class="btn btn-primary">View Details</a>
+                            <a href="{{ route('reservations.details', ['id' => $reservation->id]) }}" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
                 @endforeach

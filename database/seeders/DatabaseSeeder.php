@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Reservation;
+use App\Models\Ticket;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,14 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::all()->each(function ($user) {
-            Event::factory()->count(10)->create(['user_id' => $user->id]);
-        });
+
         \App\Models\User::factory(10)->create();
         \App\Models\Event::factory(100)->create();
+        $reservations = Reservation::factory(10)->create();
+        foreach ($reservations as $reservation) {
+            // Maak 1 tot 10 tickets voor elke reservering
+            Ticket::factory(rand(1, 10))->state(['reservation_id' => $reservation->id])->create();
+        }
 
         \App\Models\Role::create(['name' => 'admin']);
         \App\Models\Role::create(['name' => 'customer']);
+
 
 
         // \App\Models\User::factory()->create([
@@ -30,3 +36,4 @@ class DatabaseSeeder extends Seeder
         // ]);
     }
 }
+

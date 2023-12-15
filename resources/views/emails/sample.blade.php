@@ -15,7 +15,7 @@
 
     <ul>
         @foreach($reservedTickets as $ticket)
-            <li>Ticket ID: {{ $ticket->id }} - Type: {{ $ticket->type }}</li>
+            <li>Ticket ID: {{ $ticket->id }}</li>
         @endforeach
     </ul>
 

@@ -5,6 +5,12 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+use App\Models\User;
+use App\Models\Event;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -25,7 +31,8 @@ class EventFactory extends Factory
         $sevenDaysAgo = $today->copy()->subDays(7);
         $date = fake()->dateTimeBetween('-10 days', '+30 days', null);
         $hour = fake()->randomElement([14, 15, 16]); // Kies een willekeurig uur
-        $minutes = fake()->numberBetween(0, 59); // Genereer willekeurige minuten
+        $minutes = fake()->numberBetween(0, 59); // Genereer willekeurige minutes
+        
 
         $time = sprintf('%02d:%02d', $hour, $minutes); // Formatteer de tijd als HH:MM
 
@@ -38,7 +45,7 @@ class EventFactory extends Factory
             'created_at' => now(),
             'updated_at' => now(),
             'description' =>fake()->text(),
-            'price' => $faker->randomFloat(2, 0, 1000), // Genereert een willekeurige prijs tussen 0 en 1000 met 2 decimalen
+            'price' => $faker->randomFloat(2, 0, 100), // Genereert een willekeurige prijs tussen 0 en 1000 met 2 decimalen
 
         ];
     }

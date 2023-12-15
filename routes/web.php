@@ -53,9 +53,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/reservations', [ReservationController::class, 'userReservations'])->name('user.reservations');
     Route::get('/reservations', [ReservationController::class, 'allReservations'])->name('all.reservations');
     Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
-    Route::get('/reservations/{id}', [ReservationController::class, 'showReservation'])->name('reservations.show');
+    // Route::get('/reservations/{id}', [ReservationController::class, 'showReservation'])->name('reservations.show');
     Route::get('/events/{id}', [EventController::class, 'show'])->name('events.details');
     Route::get('/reservation/{id}/pdf',[ReservationController::class, 'downloadPdf'])->name('reservation.pdf');
+    Route::get('/reservations/{id}', [ReservationController::class, 'show'])->name('reservations.details');
 
     // Meer routes toevoegen indien nodig
 });
