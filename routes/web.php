@@ -44,6 +44,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
     Route::get('/admin/tickets', [TicketController::class, 'index'])->name('admin.tickets.index');
     Route::put('/admin/tickets/{ticket}', [TicketController::class, 'update'])->name('admin.tickets.update');
+    Route::get('/admin/reservations/{id}', [ReservationController::class, 'adminShow'])->name('reservations.show');
+    Route::delete('/admin/reservations/{id}', [ReservationController::class, 'adminDestroy'])->name('reservations.destroy');
+    Route::patch('/admin/reservations/{id}/scanned', [ReservationController::class, 'adminUpdateScanned'])->name('reservations.updateScanned');
+
+
 
 
     // Route::resource('events');

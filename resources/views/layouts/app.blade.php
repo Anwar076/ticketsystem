@@ -42,8 +42,8 @@
                         <a class="nav-link" href="{{ route('admin.dashboard') }}"> Admin</a>
                         <a class="nav-link" href="{{ route('admin.events.index') }}">Evenementen beheren</a>
                         <a class="nav-link" href="{{ route('admin.users.index') }}">Gebruikers beheren</a>
-                        <a class="nav-link" href="{{ route('admin.tickets.index') }}">reservatie beheren</a>
-                        <!-- <a class="nav-link" href="{{ route('admin.reservations.index') }}">Reserveringen beheren</a> -->
+                        <a class="nav-link" href="{{ route('admin.tickets.index') }}">tickets beheren</a>
+                        <a class="nav-link" href="{{ route('admin.reservations.index') }}">Reserveringen beheren</a>
                         @endif
                         @guest
                         @if (Route::has('login'))

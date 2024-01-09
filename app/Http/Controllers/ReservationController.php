@@ -72,41 +72,70 @@ class ReservationController extends Controller
     // maak een niewe functie aan in de ReservationController downloadPdf waarin je de PDF genereert en download
     public function downloadPdf($id)
     {
-        $reservation = Reservation::with('tickets')->findOrFail($id);
+        $reservation = Reservation::with(['tickets', 'event'])->findOrFail($id);
         $ticketNumbers = $reservation->tickets->pluck('id');
 
-        $pdf = PDF::loadView('reservations.pdf', ['tickets' => $reservation->tickets, 'ticketNumbers' => $ticketNumbers]);
+        $pdf = PDF::loadView('reservations.pdf', [
+            'tickets' => $reservation->tickets,
+            'ticketNumbers' => $ticketNumbers,
+            'event' => $reservation->event // Voeg de evenementgegevens toe
+            
+        ]);
 
         return $pdf->download('reservations.pdf');
     }
 
+    public function adminShow($id)
+    {
+        $reservation = Reservation::with('tickets')->findOrFail($id);
 
-//     public function checkMaxTicketAndEventCapacity($userId, $eventId)
-//     {
-//         $userReservations = Reservation::where('user_id', $userId)
-//             ->where('event_id', $eventId)
-//             ->get();
+        return view('admin.reservations.details', ['tickets' => $reservation->tickets, 'reservation' => $reservation]);
+    }
 
-//         $event = Event::findOrFail($eventId);
+    public function adminDestroy($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->delete();
 
-//         $maxTicketPerUser = $event->max_ticket_per_user;
-//         $eventCapacity = $event->capacity;
+        return redirect()->route('admin.reservations.index');
+    }
 
-//         $totalTicketsReserved = 0;
-//         foreach ($userReservations as $reservation) {
-//             $totalTicketsReserved += $reservation->tickets->count();
-//         }
+    public function adminUpdateScanned($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->scanned = !$reservation->scanned;
+        $reservation->save();
 
-//         $remainingTickets = $eventCapacity - $totalTicketsReserved;
+        return redirect()->route('admin.reservations.show', $reservation);
+    }
 
-//         if ($totalTicketsReserved >= $maxTicketPerUser) {
-//             return "Maximum ticket limit per user reached.";
-//         }
 
-//         if ($totalTicketsReserved >= $eventCapacity) {
-//             return "Event capacity reached.";
-//         }
+    //     public function checkMaxTicketAndEventCapacity($userId, $eventId)
+    //     {
+    //         $userReservations = Reservation::where('user_id', $userId)
+    //             ->where('event_id', $eventId)
+    //             ->get();
 
-//         return "Remaining tickets: " . $remainingTickets;
-//     }
+    //         $event = Event::findOrFail($eventId);
+
+    //         $maxTicketPerUser = $event->max_ticket_per_user;
+    //         $eventCapacity = $event->capacity;
+
+    //         $totalTicketsReserved = 0;
+    //         foreach ($userReservations as $reservation) {
+    //             $totalTicketsReserved += $reservation->tickets->count();
+    //         }
+
+    //         $remainingTickets = $eventCapacity - $totalTicketsReserved;
+
+    //         if ($totalTicketsReserved >= $maxTicketPerUser) {
+    //             return "Maximum ticket limit per user reached.";
+    //         }
+
+    //         if ($totalTicketsReserved >= $eventCapacity) {
+    //             return "Event capacity reached.";
+    //         }
+
+    //         return "Remaining tickets: " . $remainingTickets;
+    //     }
 }
